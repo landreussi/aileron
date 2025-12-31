@@ -19,7 +19,7 @@ dependencies = [
 
 [[package]]
 name = "aileron"
-version = "0.1.0"
+version = "0.1.2"
 dependencies = [
  "apache-avro",
  "derive_builder",

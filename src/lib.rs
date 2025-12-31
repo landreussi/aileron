@@ -1,3 +1,7 @@
+//! Aileron
+//!
+//! A toolkit to use avro schemas as rust types.
+
 use proc_macro::TokenStream;
 use rsgen_avro::{GeneratorBuilder, ImplementAvroSchema, Source};
 use syn::{
@@ -108,6 +112,69 @@ fn parse_enum(expr: Expr) -> Result<ImplementAvroSchema> {
     }
 }
 
+/// Includes an avro schema into compatible types.
+///
+/// This macro just converts all the schema into a valid and compatible rust struct for that
+/// schema.
+///
+/// ## Features
+///
+/// - **In-line customization**
+///   Configure code generation directly at the call site, including numeric
+///   precision, schema handling strategy, and date/time representations.
+///
+/// - **Custom derives**
+///   Automatically derive additional traits for the generated types using
+///   `extra_derives`, making it easy to integrate with serialization,
+///   validation, or zero-copy frameworks.
+///
+/// - **Builder pattern support**
+///   When `derive_builders` is enabled, builder types are generated alongside
+///   structs to allow ergonomic construction.
+///
+/// - **Avro schema integration**
+///   Optionally implements `AvroSchema` for the generated types, allowing
+///   seamless interoperability with Avro tooling and runtime validation.
+///
+/// - **Date and time handling**
+///   With `use_chrono_dates`, Avro logical types are mapped to `chrono`
+///   date and time types instead of raw integers.
+///
+/// - **Union handling**
+///   Supports Avro unions, either as idiomatic Rust enums or via
+///   `avro-rs` union types when `use_avro_rs_unions` is enabled.
+///
+/// - **Precision-aware numeric types**
+///   Decimal and fixed types respect the configured precision and scale,
+///   generating appropriate Rust representations.
+///
+/// ## Examples:
+///
+/// Default approach:
+/// ```rust
+/// aileron::include_avro!("schemas/person.avsc");
+/// ```
+///
+/// This also supports globbing i.e, you could just pass `"*.avsc"` and it will get all
+/// the files that matches with the pattern:
+/// ```rust
+/// aileron::include_avro!("schemas/*.avsc");
+/// ```
+///
+/// This will make the `Person` struct implement both `rkyv::Serialize` and `serde::Serialize`
+/// (which is derived by default):
+/// ```rust
+///    aileron::include_avro!(
+///       "tests/person.avsc",
+///       precision = 4,
+///       impl_avro_schema = Derive,
+///       derive_builders = true,
+///       use_chrono_dates = true,
+///       use_avro_rs_unions = true,
+///       extra_derives = ["rkyv::Archive", "rkyv::Serialize", "Default"],
+///   );
+///
+/// ```
 #[proc_macro]
 pub fn include_avro(tokens: TokenStream) -> TokenStream {
     let input = parse_macro_input!(tokens as IncludeAvroInput);
@@ -117,8 +184,12 @@ pub fn include_avro(tokens: TokenStream) -> TokenStream {
     input
         .builder
         .build()
-        .unwrap()
+        .expect("Could not initialize avro generator")
         .generate(&source, &mut buffer)
-        .unwrap();
-    String::from_utf8(buffer).unwrap().parse().unwrap()
+        .expect("Could not generate type definitions");
+
+    String::from_utf8(buffer)
+        .expect("Buffer is not a valid UTF-8 String")
+        .parse()
+        .expect("Could not parse the generated string into code")
 }
