@@ -3,4 +3,15 @@ name = "aileron"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+proc-macro = true
+
 [dependencies]
+rsgen-avro = "0.19.1"
+syn = "2.0.111"
+
+[dev-dependencies]
+apache-avro = "0.21.0"
+derive_builder = "0.20.2"
+rkyv = "0.8.12"
+serde = "1.0.228"

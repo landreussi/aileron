@@ -1,0 +1,34 @@
+{
+  "type": "record",
+  "name": "Person",
+  "namespace": "com.example",
+  "doc": "A basic schema for testing Avro serialization and generation.",
+  "fields": [
+    {
+      "name": "id",
+      "type": "int",
+      "doc": "Unique identifier"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "doc": "Full name of the person"
+    },
+    {
+      "name": "age",
+      "type": "int",
+      "doc": "Age in years"
+    },
+    {
+      "name": "email",
+      "type": ["null", "string"],
+      "default": null,
+      "doc": "Optional email address"
+    },
+    {
+      "name": "is_active",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}
