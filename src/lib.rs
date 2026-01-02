@@ -37,6 +37,8 @@ impl Parse for IncludeAvroInput {
                 "derive_builders" => builder = builder.derive_builders(parse_bool(val)?),
                 "extra_derives" => builder = builder.extra_derives(parse_vec(val)?),
                 "impl_avro_schema" => builder = builder.implement_avro_schema(parse_enum(val)?),
+                "override_fields" => unimplemented!("`override_fields` is not implemented yet"),
+                "override_field" => unimplemented!("`override_field` is not implemented yet"),
                 _ => {
                     return Err(syn::Error::new(key.span(), format!("Unknown flag: {key}")));
                 }
@@ -114,43 +116,9 @@ fn parse_enum(expr: Expr) -> Result<ImplementAvroSchema> {
 
 /// Includes an avro schema into compatible types.
 ///
-/// This macro just converts all the schema into a valid and compatible rust struct for that
+/// This macro just converts all the schema into a valid and compatible rust definitions for that
 /// schema.
 ///
-/// ## Features
-///
-/// - **In-line customization**
-///   Configure code generation directly at the call site, including numeric
-///   precision, schema handling strategy, and date/time representations.
-///
-/// - **Custom derives**
-///   Automatically derive additional traits for the generated types using
-///   `extra_derives`, making it easy to integrate with serialization,
-///   validation, or zero-copy frameworks.
-///
-/// - **Builder pattern support**
-///   When `derive_builders` is enabled, builder types are generated alongside
-///   structs to allow ergonomic construction.
-///
-/// - **Avro schema integration**
-///   Optionally implements `AvroSchema` for the generated types, allowing
-///   seamless interoperability with Avro tooling and runtime validation.
-///
-/// - **Date and time handling**
-///   With `use_chrono_dates`, Avro logical types are mapped to `chrono`
-///   date and time types instead of raw integers.
-///
-/// - **Union handling**
-///   Supports Avro unions, either as idiomatic Rust enums or via
-///   `avro-rs` union types when `use_avro_rs_unions` is enabled.
-///
-/// - **Precision-aware numeric types**
-///   Decimal and fixed types respect the configured precision and scale,
-///   generating appropriate Rust representations.
-///
-/// ## Examples:
-///
-/// Default approach:
 /// ```rust
 /// aileron::include_avro!("schemas/person.avsc");
 /// ```
@@ -161,6 +129,9 @@ fn parse_enum(expr: Expr) -> Result<ImplementAvroSchema> {
 /// aileron::include_avro!("schemas/*.avsc");
 /// ```
 ///
+/// This supports all customizations supported by
+/// [rsgen_avro::GeneratorBuilder](https://docs.rs/rsgen-avro/latest/rsgen_avro/struct.GeneratorBuilder.html), except `override_fields`,
+/// you could just pass it as an argument.
 /// This will make the `Person` struct implement both `rkyv::Serialize` and `serde::Serialize`
 /// (which is derived by default):
 /// ```rust

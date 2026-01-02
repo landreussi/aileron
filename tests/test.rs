@@ -17,6 +17,7 @@ fn custom_macro_call() {
 
     // default is implemented!
     Person::default();
+
     // builder now exists!
     PersonBuilder::create_empty();
 }
