@@ -1,7 +1,3 @@
-//! Aileron
-//!
-//! A toolkit to use avro schemas as rust types.
-
 use proc_macro::TokenStream;
 use rsgen_avro::{GeneratorBuilder, ImplementAvroSchema, Source};
 use syn::{
@@ -120,13 +116,13 @@ fn parse_enum(expr: Expr) -> Result<ImplementAvroSchema> {
 /// schema.
 ///
 /// ```rust
-/// avrogant::include_avro!("schemas/person.avsc");
+/// avrogant_macro::include_avro!("schemas/person.avsc");
 /// ```
 ///
 /// This also supports globbing i.e, you could just pass `"*.avsc"` and it will get all
 /// the files that matches with the pattern:
 /// ```rust
-/// avrogant::include_avro!("schemas/*.avsc");
+/// avrogant_macro::include_avro!("schemas/*.avsc");
 /// ```
 ///
 /// This supports all customizations supported by
@@ -135,7 +131,7 @@ fn parse_enum(expr: Expr) -> Result<ImplementAvroSchema> {
 /// This will make the `Person` struct implement both `rkyv::Serialize` and `serde::Serialize`
 /// (which is derived by default):
 /// ```rust
-///    avrogant::include_avro!(
+///    avrogant_macro::include_avro!(
 ///       "tests/person.avsc",
 ///       precision = 4,
 ///       impl_avro_schema = Derive,
