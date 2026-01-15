@@ -5,5 +5,5 @@ resolver = "3"
 [workspace.dependencies]
 avrogant_macro.path = "avrogant_macro"
 avrogant.path = "avrogant"
-rsgen-avro = "0.19.1"
+rsgen-avro = "0.19.2"
 serde = "1.0.228"

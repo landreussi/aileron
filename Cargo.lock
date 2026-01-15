@@ -63,7 +63,7 @@ checksum = "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8"
 
 [[package]]
 name = "avrogant"
-version = "0.1.7"
+version = "0.1.8"
 dependencies = [
  "apache-avro",
  "avrogant_macro 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -858,9 +858,9 @@ dependencies = [
 
 [[package]]
 name = "rsgen-avro"
-version = "0.19.1"
+version = "0.19.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f0fd359521254c712f9c49208d5ba77bec91fe56e294cb582b64ac0cb84d004"
+checksum = "75a914f5ab94a78995fd40fff76de87e6418e58e1dac2bca309ed4375ed95c85"
 dependencies = [
  "apache-avro",
  "glob",
