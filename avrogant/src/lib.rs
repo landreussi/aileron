@@ -58,6 +58,8 @@ impl AvroCompiler {
     ///
     /// Logical Avro date/time types will map to `chrono` types
     /// instead of primitive integers.
+    ///
+    /// Your code should depend on [`chrono`](https://docs.rs/chrono) crate.
     pub fn use_chrono_dates(mut self, use_chrono_dates: bool) -> Self {
         self.generator = self.generator.use_chrono_dates(use_chrono_dates);
         self
@@ -68,7 +70,7 @@ impl AvroCompiler {
     /// When enabled, a builder pattern will be generated alongside
     /// the main structs.
     ///
-    /// Your code should depend on [`derive_builder`] crate.
+    /// Your code should depend on [`derive_builder`](https://docs.rs/derive_builder) crate.
     pub fn derive_builders(mut self, derive_builders: bool) -> Self {
         self.generator = self.generator.derive_builders(derive_builders);
         self
@@ -76,7 +78,7 @@ impl AvroCompiler {
 
     /// Controls whether Avro schema implementations are generated.
     ///
-    /// Your code should depend on [`apache-avro`] crate.
+    /// Your code should depend on [`apache-avro`](https://docs.rs/apache-avro) crate.
     pub fn implement_avro_schema(mut self, impl_schemas: ImplementAvroSchema) -> Self {
         self.generator = self.generator.implement_avro_schema(impl_schemas);
         self

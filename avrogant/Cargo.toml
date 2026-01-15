@@ -3,7 +3,7 @@ name = "avrogant"
 description = "A toolkit to use avro schemas as rust types"
 authors = ["Lucas Andreussi <lucasandreussi@gmail.com>"]
 license = "MIT"
-version = "0.1.8"
+version = "0.1.9"
 edition = "2024"
 
 [features]

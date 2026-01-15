@@ -5,7 +5,7 @@
 ### Rationale:
 
 This crate is suitable when you need to generate a 100% compatible rust types for an avro schema.
-It will transform the entire schema in types, so it will make your code need the schema to actually compile.
+It will transform the entire schema in types, so it will make your code depend on the schema to actually compile.
 This makes the struct mapping from a avro schema more ergonomic and less error-prone.
 
 Think of it like [`tonic`](https://github.com/hyperium/tonic), but for avro instead of protocol buffers.
@@ -36,5 +36,5 @@ mod avro {
 }
 ```
 
-You could customize the way your type is generated, like adding more derive traits in it.
+You could customize the way your type is generated, like deriving more traits in the generated types.
 Please refer to the [docs](https://docs.rs/avrogant/latest/avrogant) to see more.
