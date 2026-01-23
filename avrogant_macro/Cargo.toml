@@ -3,7 +3,7 @@ name = "avrogant_macro"
 description = "A proc macro for converting Avro schemas into Rust types"
 authors = ["Lucas Andreussi <lucasandreussi@gmail.com>"]
 license = "MIT"
-version = "0.1.2"
+version = "0.2.1"
 edition = "2024"
 
 [lib]

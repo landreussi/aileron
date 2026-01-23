@@ -12,9 +12,9 @@ Think of it like [`tonic`](https://github.com/hyperium/tonic), but for avro inst
 
 ### Use cases:
 
-You could convert avro schemas into rust types by calling the `include_avro` macro:
+You could convert avro schemas into rust types by calling the `include_schema` macro:
 ```rust filename="avro/person.rs"
-avrogant::include_avro!("schemas/person.avsc");
+avrogant::include_schema!("schemas/person.avsc");
 ```
 
 or you could build those types automatically using build scripts:

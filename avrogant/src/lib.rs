@@ -7,7 +7,7 @@ use std::{env, fs, path::Path};
 use rsgen_avro::{FieldOverride, GeneratorBuilder, ImplementAvroSchema, Result, Source};
 
 #[cfg(feature = "macro")]
-pub use avrogant_macro::include_avro;
+pub use avrogant_macro::include_schema;
 
 /// Avro compiler to be used in build scripts.
 pub struct AvroCompiler {

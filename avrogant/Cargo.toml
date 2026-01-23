@@ -3,7 +3,7 @@ name = "avrogant"
 description = "A toolkit to use avro schemas as rust types"
 authors = ["Lucas Andreussi <lucasandreussi@gmail.com>"]
 license = "MIT"
-version = "0.1.9"
+version = "0.2.0"
 edition = "2024"
 
 [features]
@@ -11,7 +11,7 @@ default = ["macro"]
 macro = ["dep:avrogant_macro"]
 
 [dependencies]
-avrogant_macro = {version = "0.1.2", optional = true}
+avrogant_macro = {version = "0.2.0", optional = true}
 rsgen-avro.workspace = true
 
 [dev-dependencies]

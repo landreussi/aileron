@@ -1,11 +1,11 @@
 #[test]
 fn default_macro_call() {
-    avrogant::include_avro!("avrogant/tests/person.avsc");
+    avrogant::include_schema!("avrogant/tests/person.avsc");
 }
 
 #[test]
 fn custom_macro_call() {
-    avrogant::include_avro!(
+    avrogant::include_schema!(
         "avrogant/tests/person.avsc",
         precision = 4,
         impl_avro_schema = Derive,

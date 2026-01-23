@@ -116,13 +116,13 @@ fn parse_enum(expr: Expr) -> Result<ImplementAvroSchema> {
 /// schema.
 ///
 /// ```rust
-/// avrogant_macro::include_avro!("schemas/person.avsc");
+/// avrogant_macro::include_schema!("schemas/person.avsc");
 /// ```
 ///
 /// This also supports globbing i.e, you could just pass `"*.avsc"` and it will get all
 /// the files that matches with the pattern:
 /// ```rust
-/// avrogant_macro::include_avro!("schemas/*.avsc");
+/// avrogant_macro::include_schema!("schemas/*.avsc");
 /// ```
 ///
 /// This supports all customizations supported by
@@ -131,7 +131,7 @@ fn parse_enum(expr: Expr) -> Result<ImplementAvroSchema> {
 /// This will make the `Person` struct implement both `rkyv::Serialize` and `serde::Serialize`
 /// (which is derived by default):
 /// ```rust
-///    avrogant_macro::include_avro!(
+///    avrogant_macro::include_schema!(
 ///       "tests/person.avsc",
 ///       precision = 4,
 ///       impl_avro_schema = Derive,
@@ -143,7 +143,7 @@ fn parse_enum(expr: Expr) -> Result<ImplementAvroSchema> {
 ///
 /// ```
 #[proc_macro]
-pub fn include_avro(tokens: TokenStream) -> TokenStream {
+pub fn include_schema(tokens: TokenStream) -> TokenStream {
     let input = parse_macro_input!(tokens as IncludeAvroInput);
     let source = Source::GlobPattern(&input.path);
     let mut buffer = vec![];
