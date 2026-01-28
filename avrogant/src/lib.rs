@@ -85,8 +85,9 @@ impl AvroCompiler {
     }
 
     /// Adds additional `#[derive(...)]` attributes to generated types.
-    pub fn extra_derives(mut self, extra_derives: Vec<String>) -> Self {
-        self.generator = self.generator.extra_derives(extra_derives);
+    pub fn extra_derives<'a>(mut self, extra_derives: impl IntoIterator<Item = &'a str>) -> Self {
+        let derives = extra_derives.into_iter().map(ToString::to_string).collect();
+        self.generator = self.generator.extra_derives(derives);
         self
     }
 
